@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.tliaswebmanagement.mapper.EmpMapper">
+    <select id="list" resultType="com.itheima.tliaswebmanagement.pojo.Emp">
+        SELECT e.*,d.name dept_name FROM emp e LEFT JOIN tlias.dept d on d.id = e.dept_id
+        <where>
+            <if test="name!=null and name != ''">
+                e.name LIKE CONCAT('%',#{name},'%')
+            </if>
+            <if test="gender!=null">
+                AND e.gender = #{gender}
+            </if>
+            <if test="begin!=null and end!=null">
+                AND e.entry_date BETWEEN #{begin} AND #{end}
+            </if>
+        </where>
+        ORDER BY e.update_time DESC
+    </select>
+</mapper>
