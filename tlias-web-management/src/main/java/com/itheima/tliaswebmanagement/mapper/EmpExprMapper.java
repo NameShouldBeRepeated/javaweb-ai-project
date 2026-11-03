@@ -1,7 +1,6 @@
 package com.itheima.tliaswebmanagement.mapper;
 
 import com.itheima.tliaswebmanagement.pojo.EmpExpr;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,4 +15,10 @@ public interface EmpExprMapper {
      * @param empExpr 工作经历JSON
      */
     void insertBatch(List<EmpExpr> empExpr);
+
+    /**
+     * 批量删除工作经历
+     * @param empids
+     */
+    void deleteByEmpId(List<Integer> empids);
 }

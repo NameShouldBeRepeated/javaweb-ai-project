@@ -3,10 +3,8 @@ package com.itheima.tliaswebmanagement.service;
 import com.itheima.tliaswebmanagement.pojo.Emp;
 import com.itheima.tliaswebmanagement.pojo.EmpQueryParam;
 import com.itheima.tliaswebmanagement.pojo.PageResult;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.List;
 
 public interface EmpService {
     /**
@@ -22,4 +20,10 @@ public interface EmpService {
      * @param emp JSON传来的员工对象
      */
     void save(Emp emp);
+
+    /**
+     * 批量删除员工
+     * @param ids 员工id数组
+     */
+    void delete(List<Integer> ids);
 }

@@ -35,7 +35,7 @@ public class DeptController {
      */
     /*
     @DeleteMapping("/depts")
-    public Result delete(@RequestParam(value = "id",required = false) Integer deptId){
+    public Result deleteByEmpId(@RequestParam(value = "id",required = false) Integer deptId){
         System.out.println("被删除的部门id"+deptId);
         return Result.success();
     }
