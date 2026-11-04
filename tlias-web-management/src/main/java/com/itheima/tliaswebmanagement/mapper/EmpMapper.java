@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -45,7 +46,17 @@ public interface EmpMapper {
     +"VALUES (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
     void insert(Emp emp);
 
-
-
+    //在xml文件中配置了所需SQL语句
     void deleteById(List<Integer> ids);
+
+    //@Select("SELECT e.* ,ee.id emp_exprId,ee.begin emp_exprBegin,ee.end emp_exprEnd,ee.company emp_exprCompany,ee.job emp_exprJob FROM emp e LEFT JOIN tlias.emp_expr ee on e.id = ee.emp_id WHERE e.id = #{id}")
+    Emp getById(Integer id);
+
+
+    void updateById(Emp emp);
+
+    //统计员工职位人数
+    List<Map<String,Object>> countEmpJobData();
+    //统计员工性别信息
+    List<Map<String, Object>> countEmpGenderData();
 }
