@@ -1,6 +1,8 @@
 package com.itheima.tliaswebmanagement.service.impl;
 
 import com.itheima.tliaswebmanagement.mapper.EmpMapper;
+import com.itheima.tliaswebmanagement.mapper.StudentMapper;
+import com.itheima.tliaswebmanagement.pojo.ClazzCountOption;
 import com.itheima.tliaswebmanagement.pojo.JobOption;
 import com.itheima.tliaswebmanagement.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private EmpMapper empMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
     /**
      * 统计员工职位人数
@@ -38,5 +42,28 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<Map<String, Object>> countEmpGenderData() {
         return empMapper.countEmpGenderData();
+    }
+
+    /**
+     * 统计班级学生人数
+     *
+     * @return
+     */
+    @Override
+    public ClazzCountOption countClazzData() {
+        List<Map<String,Object>> list = studentMapper.countClazzData();
+        List<Object> clazzList = list.stream().map(data -> data.get("cname")).toList();
+        List<Object> dataList = list.stream().map(data -> data.get("scount")).toList();
+        return new ClazzCountOption(clazzList,dataList);
+    }
+
+    /**
+     * 统计学生学历
+     *
+     * @return
+     */
+    @Override
+    public List<Map> getStudentDegreeData() {
+        return studentMapper.getStudentDegreeData();
     }
 }
