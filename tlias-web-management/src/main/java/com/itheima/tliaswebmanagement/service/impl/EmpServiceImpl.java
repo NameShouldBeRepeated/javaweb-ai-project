@@ -7,6 +7,8 @@ import com.itheima.tliaswebmanagement.mapper.EmpMapper;
 import com.itheima.tliaswebmanagement.pojo.*;
 import com.itheima.tliaswebmanagement.service.EmpLogService;
 import com.itheima.tliaswebmanagement.service.EmpService;
+import com.itheima.tliaswebmanagement.utils.JwtUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +16,11 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-
+@Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
 
@@ -131,5 +135,28 @@ public class EmpServiceImpl implements EmpService {
             exprList.forEach(item->{item.setEmpId(emp.getId());});//员工工作经历ID与员工ID绑定
 
         }
+    }
+
+    /**
+     * 员工输入账号密码进行登录
+     *
+     * @param emp 前端传来的员工对象
+     * @return
+     */
+    @Override
+    public LoginInfo login(Emp emp) {
+        //根据用户名和密码，查询员工的信息
+        Emp e = empMapper.selectByUsernameAndPassword(emp);
+        //判断员工是否存在
+        if(e==null){
+            return null;
+        }
+        log.info("登录成功，员工信息：{}",emp);
+        //生成jwt令牌
+        Map<String,Object> claims = new HashMap<>();
+        claims.put("id",e.getId());
+        claims.put("username",e.getUsername());
+        String Jwt = JwtUtils.generateJwt(claims);
+        return new LoginInfo(emp.getId(), emp.getUsername(), emp.getName(),Jwt);
     }
 }

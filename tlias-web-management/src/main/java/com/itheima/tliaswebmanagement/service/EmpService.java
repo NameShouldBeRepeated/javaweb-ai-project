@@ -2,6 +2,7 @@ package com.itheima.tliaswebmanagement.service;
 
 import com.itheima.tliaswebmanagement.pojo.Emp;
 import com.itheima.tliaswebmanagement.pojo.EmpQueryParam;
+import com.itheima.tliaswebmanagement.pojo.LoginInfo;
 import com.itheima.tliaswebmanagement.pojo.PageResult;
 
 import java.util.List;
@@ -39,4 +40,11 @@ public interface EmpService {
      * @param emp 前端传来的员工对象
      */
     void update(Emp emp);
+
+    /**
+     * 员工输入账号密码进行登录
+     * @param emp 前端传来的员工对象
+     * @return
+     */
+    LoginInfo login(Emp emp);
 }
