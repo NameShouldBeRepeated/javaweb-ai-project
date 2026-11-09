@@ -1,5 +1,6 @@
 package com.itheima.tliaswebmanagement.controller;
 
+import com.itheima.tliaswebmanagement.anno.Log;
 import com.itheima.tliaswebmanagement.pojo.Emp;
 import com.itheima.tliaswebmanagement.pojo.EmpQueryParam;
 import com.itheima.tliaswebmanagement.pojo.PageResult;
@@ -32,6 +33,7 @@ public class EmpController {
         return Result.success(pageResult);
     }
 
+    @Log
     @PostMapping()
     public Result save(@RequestBody Emp emp) {
         log.info("新增员工：{}",emp);
@@ -39,6 +41,7 @@ public class EmpController {
         return Result.success();
     }
 
+    @Log
     @DeleteMapping()
     public Result delete(@RequestParam List<Integer> ids){
         log.info("删除员工：{}", ids);
@@ -53,6 +56,7 @@ public class EmpController {
         return Result.success(emp);
     }
 
+    @Log
     @PutMapping()
     public Result update(@RequestBody Emp emp){
         log.info("修改员工：{}",emp);

@@ -1,5 +1,6 @@
 package com.itheima.tliaswebmanagement.controller;
 
+import com.itheima.tliaswebmanagement.anno.Log;
 import com.itheima.tliaswebmanagement.pojo.Clazz;
 import com.itheima.tliaswebmanagement.pojo.PageResult;
 import com.itheima.tliaswebmanagement.pojo.Result;
@@ -47,6 +48,7 @@ public class ClazzController {
      * @param id 班级ID
      * @return
      */
+    @Log
     @DeleteMapping("/{id}")
     public Result Delete(@PathVariable Integer id){
         log.info("根据ID删除班级：{}",id);
@@ -59,6 +61,7 @@ public class ClazzController {
      * @param clazz 新增班级类
      * @return
      */
+    @Log
     @PostMapping()
     public Result Save(@RequestBody Clazz clazz){
         log.info("新增班级");
@@ -89,6 +92,12 @@ public class ClazzController {
         return Result.success(list);
     }
 
+    /**
+     * 更新班级信息
+     * @param clazz 班级类
+     * @return
+     */
+    @Log
     @PutMapping()
     public Result update(@RequestBody Clazz clazz){
         log.info("更新班级信息：{}",clazz);

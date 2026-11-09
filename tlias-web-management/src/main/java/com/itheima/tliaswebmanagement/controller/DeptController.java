@@ -1,5 +1,6 @@
 package com.itheima.tliaswebmanagement.controller;
 
+import com.itheima.tliaswebmanagement.anno.Log;
 import com.itheima.tliaswebmanagement.pojo.Dept;
 import com.itheima.tliaswebmanagement.pojo.Result;
 import com.itheima.tliaswebmanagement.service.DeptService;
@@ -49,6 +50,7 @@ public class DeptController {
      * @param id 部门id
      * @return
      */
+    @Log
     @DeleteMapping
     public Result delete(Integer id){
         //System.out.println("根据ID删除部门"+id);
@@ -62,6 +64,7 @@ public class DeptController {
      * @param dept 部门名称
      * @return
      */
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept){
         //System.out.println("新增部门"+dept);
@@ -99,6 +102,7 @@ public class DeptController {
      * @param dept 修改后的部门信息
      * @return
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept){
         //System.out.println("修改部门 "+dept);

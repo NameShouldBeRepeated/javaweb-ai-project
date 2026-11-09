@@ -1,5 +1,6 @@
 package com.itheima.tliaswebmanagement.controller;
 
+import com.itheima.tliaswebmanagement.anno.Log;
 import com.itheima.tliaswebmanagement.pojo.Result;
 import com.itheima.tliaswebmanagement.pojo.Student;
 import com.itheima.tliaswebmanagement.pojo.StudentQueryParam;
@@ -44,6 +45,7 @@ public class StudentController {
      * @param ids 学生的ID（可以一次删除多个）
      * @return
      */
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids){
         log.info("根据ID删除学生：{}",ids);
@@ -56,6 +58,7 @@ public class StudentController {
      * @param student 前端传来的student类
      * @return
      */
+    @Log
     @PostMapping()
     public Result save(@RequestBody Student student){
         log.info("添加学生：{}",student);
@@ -79,6 +82,7 @@ public class StudentController {
      * @param student
      * @return
      */
+    @Log
     @PutMapping()
     public Result update(@RequestBody Student student){
         studentService.update(student);
@@ -91,6 +95,7 @@ public class StudentController {
      * @param score 学生扣除分数
      * @return
      */
+    @Log
     @PutMapping("/violation/{id}/{score}")
     public Result violationHandle(@PathVariable Integer id, @PathVariable Integer score){
         studentService.violationHandle(id,score);
